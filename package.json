@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "build": ""
+    "build": "mkdir -p public && cp -r app.js styles.css public/ && echo 'Build completed'"
 
   },
   "dependencies": {

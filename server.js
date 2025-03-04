@@ -7,8 +7,15 @@ const backendUrl = process.env.BACKEND_URL || 'http://localhost:8080';
 const PORT = process.env.PORT || 8080;
 
 
-// Serve static files from the public directory
-app.use(express.static(path.join(__dirname, 'public')));
+// Serve static files from the public directory with proper caching
+app.use(express.static(path.join(__dirname, 'public'), {
+    maxAge: '1h',
+    setHeaders: (res, path) => {
+        if (path.endsWith('.css')) {
+            res.setHeader('Content-Type', 'text/css');
+        }
+    }
+}));
 
 // Proxy /api requests to the Java backend
 app.use('/api', createProxyMiddleware({
