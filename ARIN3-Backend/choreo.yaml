@@ -1,0 +1,35 @@
+version: 1.0
+project: ar-navigation
+services:
+  - name: ar-navigation-full
+    source:
+      language: java
+      directory: .
+    build:
+      command: |
+        cd ARIN3-Backend
+        mvn clean install
+        cd ..
+        npm install
+    docker:
+      dockerfile: Dockerfile
+      context: .
+    deploy:
+      resources:
+        memory: 512Mi
+      env:
+        - name: PORT
+          value: "8080"
+      healthCheck:
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 8080
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 8080
+          initialDelaySeconds: 30
+          periodSeconds: 10
