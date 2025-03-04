@@ -244,10 +244,13 @@ function startNavigation() {
     startBtn.style.display = 'none';
     stopBtn.style.display = 'block';
     
+    console.log('Navigation started'); // Debugging log
+
     // Create full navigation path from current position to selected location
     navigationPath = getAllPathPoints();
     createNavigationPath();
 }
+
 
 function stopNavigation() {
     // Hide navigation UI
@@ -255,11 +258,14 @@ function stopNavigation() {
     startBtn.style.display = 'block';
     stopBtn.style.display = 'none';
     
+    console.log('Navigation stopped'); // Debugging log
+
     // Clear navigation path
     selectedLocation = null;
     navigationPath = [];
     createNavigationPath();
 }
+
 
 function getAllPathPoints() {
     // Return all points in order from start to destination
